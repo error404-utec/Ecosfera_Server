@@ -88,5 +88,5 @@ public class Detalle implements Serializable {
 	}
 	
 	
-   
+   //coso detalle
 }
