@@ -10,6 +10,10 @@ import javax.persistence.*;
  * Entity implementation class for Entity: TipoObservacion
  *
  */
+
+//cambio commit
+
+
 @Entity
 @Table(name="TIPOSOBSERVACIONES",uniqueConstraints={
 	    @UniqueConstraint(columnNames = {"NOMBRE"},name="UK_TIPOOBSERVACION_NOM")
@@ -79,6 +83,12 @@ public class TipoObservacion implements Serializable {
 
 	public void setCaracteristicas(List<Caracteristica> caracteristicas) {
 		this.caracteristicas = caracteristicas;
+	}
+
+	public void asignarCaracteristica(Caracteristica caracteristica) {
+		// TODO Auto-generated method stub
+		this.caracteristicas.add(caracteristica);
+		
 	}
 	
 	

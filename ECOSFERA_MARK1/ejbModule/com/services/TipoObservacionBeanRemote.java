@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.entities.Permiso;
 import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
+//cambio commit
 @Remote
 public interface TipoObservacionBeanRemote {
 	

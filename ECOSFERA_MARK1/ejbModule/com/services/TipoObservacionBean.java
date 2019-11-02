@@ -8,12 +8,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Permiso;
 import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
 /**
  * Session Bean implementation class TipoObservacion
  */
+//cambio commit
 @Stateless
 public class TipoObservacionBean implements TipoObservacionBeanRemote {
 	@PersistenceContext
@@ -40,17 +42,16 @@ public class TipoObservacionBean implements TipoObservacionBeanRemote {
 			throw new ServiciosException("No se pudo crear el tipo de Observación");
 		}
 	}
-    
-
+	
 	@Override
-	public void actualizar(com.entities.TipoObservacion tipoObservacion) throws ServiciosException {
-		try{
+   	public void actualizar(TipoObservacion tipoObservacion) throws ServiciosException {
+   		try{
    			em.merge(tipoObservacion);
    			em.flush();
    		}catch(PersistenceException e){
-   			throw new ServiciosException("No se pudo actualizar el Tipo de Observación");
+   			throw new ServiciosException("No se pudo actualizar el tipo de observaci�n");
    		}
-	}
+   	}
 
 	@Override
 	public void borrar(Long id) throws ServiciosException {
