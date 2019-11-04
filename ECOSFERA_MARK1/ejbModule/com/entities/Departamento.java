@@ -71,13 +71,9 @@ public class Departamento implements Serializable {
 	}
    
 	
-	//hola coso comentario
-	
-	//push eclipse
-	
-	//segundo cambio prueba
-
-	//nico 
+	public void asignarLocalidad(Localidad localidad) {
+		this.localidades.add(localidad);
+	}
 	
 
 }

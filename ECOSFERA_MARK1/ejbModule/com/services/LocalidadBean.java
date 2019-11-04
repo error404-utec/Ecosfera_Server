@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Departamento;
 import com.entities.Localidad;
 import com.exceptions.ServiciosException;
 
@@ -70,5 +71,11 @@ public class LocalidadBean implements LocalidadBeanRemote {
    		TypedQuery<Localidad> query = em.createQuery("select l from Localidad l WHERE l.nombre LIKE :nombre",Localidad.class).setParameter("nombre", filtro);
    		return query.getResultList();
    	}
+
+	@Override
+	public Localidad obtenerPorID(Long id) {
+		TypedQuery<Localidad> query = em.createQuery("select l from Localidad l WHERE l.id LIKE :id",Localidad.class).setParameter("id", id);
+		return query.getSingleResult();
+	}
 
 }
