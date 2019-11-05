@@ -22,7 +22,8 @@ public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
 
-    /**
+
+	/**
      * Default constructor. 
      */
     public TipoDocumentoBean() {

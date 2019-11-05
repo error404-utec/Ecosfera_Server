@@ -15,3 +15,4 @@ public interface UsuarioBeanRemote {
 	List<Usuario> obtenerTodos();
 	List<Usuario> obtenerTodos(String filtro);
 }
+

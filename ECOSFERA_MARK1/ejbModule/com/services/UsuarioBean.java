@@ -23,6 +23,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
     /**
      * Default constructor. 
      */
+	
     public UsuarioBean() {
         // TODO Auto-generated constructor stub
     }

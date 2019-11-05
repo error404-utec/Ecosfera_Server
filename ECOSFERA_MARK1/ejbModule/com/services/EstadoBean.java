@@ -23,6 +23,7 @@ public class EstadoBean implements EstadoBeanRemote {
 	private EntityManager em;
 
     public EstadoBean() {
+    	
 
     }
 

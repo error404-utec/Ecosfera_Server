@@ -14,4 +14,5 @@ public interface EstadoBeanRemote {
 	void borrar(Long id) throws ServiciosException;
 	List<Estado> obtenerTodos();
 	List<Estado> obtenerTodos(String filtro);
+	
 }
