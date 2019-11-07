@@ -16,5 +16,6 @@ public interface TipoDocumentoBeanRemote {
 	List<TipoDocumento> obtenerTodos(String filtro);
 	TipoDocumento obtenerporID(Long id);
 	void crearOModificar(TipoDocumento tipoDocumento) throws ServiciosException;
+	TipoDocumento obtenerPorNombre(String nombre);
 }
 

@@ -94,5 +94,11 @@ public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 		return query.getSingleResult();
 	}
 
+	@Override
+	public TipoDocumento obtenerPorNombre(String nombre) {
+		TypedQuery<TipoDocumento> query = em.createQuery("select t from TipoDocumento t WHERE t.nombre = :nombre",TipoDocumento.class).setParameter("nombre", nombre);
+		return query.getSingleResult();
+	}
+
 	
 }
