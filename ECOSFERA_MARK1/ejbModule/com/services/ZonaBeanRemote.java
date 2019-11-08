@@ -16,5 +16,7 @@ public interface ZonaBeanRemote {
 	List<Zona> obtenerTodos();
 	List<Zona> obtenerTodos(String filtro);
 	public Zona obtenerporID(Long id);
-
+	String controles_postCreate(Zona zona);
+	String controles_preDelete(Zona zona);
+	String controles_postModify(Zona zona);
 }
