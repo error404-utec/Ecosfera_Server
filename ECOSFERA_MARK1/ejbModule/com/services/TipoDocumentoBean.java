@@ -22,7 +22,8 @@ public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
 
-    /**
+
+	/**
      * Default constructor. 
      */
     public TipoDocumentoBean() {
@@ -90,6 +91,12 @@ public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 	@Override
 	public TipoDocumento obtenerporID(Long id) {
 		TypedQuery<TipoDocumento> query = em.createQuery("select t from TipoDocumento t WHERE t.id = :id",TipoDocumento.class).setParameter("id", id);
+		return query.getSingleResult();
+	}
+
+	@Override
+	public TipoDocumento obtenerPorNombre(String nombre) {
+		TypedQuery<TipoDocumento> query = em.createQuery("select t from TipoDocumento t WHERE t.nombre = :nombre",TipoDocumento.class).setParameter("nombre", nombre);
 		return query.getSingleResult();
 	}
 

@@ -14,4 +14,8 @@ public interface UsuarioBeanRemote {
 	void borrar(Long id) throws ServiciosException;
 	List<Usuario> obtenerTodos();
 	List<Usuario> obtenerTodos(String filtro);
+	Usuario obtenerPorNomber(String nombre);
+	Usuario obtenerPorId(Long id);
+	String controlarUnicidad(Usuario usuario);
 }
+

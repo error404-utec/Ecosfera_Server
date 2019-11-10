@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import com.entities.Departamento;
 import com.entities.Zona;
 import com.exceptions.ServiciosException;
+import com.sun.org.apache.xml.internal.serializer.ToUnknownStream;
 
 /**
  * Session Bean implementation class ZonaBean
@@ -41,7 +42,6 @@ public class ZonaBean implements ZonaBeanRemote {
    	
    	@Override
    	public void actualizar(Zona zona) throws ServiciosException {
-   		System.out.println("MERGE");
    		try{
    			em.merge(zona);
    			em.flush();
@@ -78,6 +78,57 @@ public class ZonaBean implements ZonaBeanRemote {
 	public Zona obtenerporID(Long id) {
 		TypedQuery<Zona> query = em.createQuery("select z from Zona z WHERE z.id LIKE :id",Zona.class).setParameter("id", id);
 		return query.getSingleResult();
+	}
+
+	@Override
+	public String controles_postCreate(Zona zona) {
+		String error = "";
+   		TypedQuery<Zona> query = em.createQuery("select z from Zona z WHERE z.nombre LIKE :nombre",Zona.class).setParameter("nombre", zona.getNombre());
+   		List<Zona> lista = query.getResultList();
+		for(Zona elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(zona.getNombre())) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		
+		if(error.isEmpty()) {
+			query = em.createQuery("select z from Zona z WHERE z.codigo LIKE :codigo",Zona.class).setParameter("codigo", zona.getCodigo());
+	   		lista.removeAll(lista);
+			lista = query.getResultList();
+			for(Zona elemento : lista) {
+				error= "El código ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		
+		return error;
+	}
+
+	@Override
+	public String controles_preDelete(Zona zona) {
+		String error = "";
+   		TypedQuery<Zona> query = em.createQuery("select z from Zona z WHERE z.id LIKE :id",Zona.class).setParameter("id", zona.getId());
+   		Zona zona2 = query.getSingleResult();
+   		List<Departamento> coldep = zona2.getDepartamentos();
+		if (!coldep.isEmpty()) {
+			error= "No se puede eliminar la zona, cuenta con departamentos asociados..";
+		}
+		return error;
+	}
+
+	@Override
+	public String controles_postModify(Zona zona) {
+		String error = "";
+   		TypedQuery<Zona> query = em.createQuery("select z from Zona z WHERE z.nombre LIKE :nombre",Zona.class).setParameter("nombre", zona.getNombre());
+   		List<Zona> lista = query.getResultList();
+		for(Zona elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(zona.getNombre()) && elemento.getId()!= zona.getId()) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		return error;
 	}
 
 

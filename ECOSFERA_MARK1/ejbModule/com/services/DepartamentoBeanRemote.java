@@ -15,4 +15,7 @@ public interface DepartamentoBeanRemote {
 	List<Departamento> obtenerTodos();
 	List<Departamento> obtenerTodos(String filtro);
 	public Departamento obtenerporID(Long id);
+	String controles_postCreate(Departamento departamento);
+	String controles_preDelete(Departamento departamento);
+	String controles_postModify(Departamento departamento);
 }

@@ -23,6 +23,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
     /**
      * Default constructor. 
      */
+	
     public UsuarioBean() {
         // TODO Auto-generated constructor stub
     }
@@ -71,5 +72,35 @@ public class UsuarioBean implements UsuarioBeanRemote {
    		return query.getResultList();
 
    	}
+
+	@Override
+	public Usuario obtenerPorNomber(String nombre) {
+   		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.nombre LIKE :nombre",Usuario.class).setParameter("nombre", nombre);
+   		return query.getSingleResult();
+	}
+
+	@Override
+	public Usuario obtenerPorId(Long id) {
+		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.id LIKE :id",Usuario.class).setParameter("id", id);
+   		return query.getSingleResult();
+	}
+
+	@Override
+	public String controlarUnicidad(Usuario usuario) {
+		
+		String respuesta = "";
+   		//TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :usuario",Usuario.class).setParameter("usuario", usuario.getUsuario());
+   		//Usuario usuario1 = null;
+   		//usuario1 = query.getSingleResult();
+   		//if (usuario1!=null) {
+   		//	respuesta ="Nombre de usuario ya existe en el sistema.";
+   	//	}
+   		
+   		/*TypedQuery<Usuario> query2 = em.createQuery("select u from Usuario u WHERE u.mail LIKE :mail",Usuario.class).setParameter("mail", usuario.getMail());
+   		if (query2.getSingleResult()!=null) {
+   			respuesta ="El mail ya se encuentra registrado en el sistema.";
+   		}*/
+		return respuesta;
+	}
 
 }

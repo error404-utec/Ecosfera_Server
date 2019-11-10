@@ -23,6 +23,7 @@ public class EstadoBean implements EstadoBeanRemote {
 	private EntityManager em;
 
     public EstadoBean() {
+    	
 
     }
 
@@ -69,6 +70,12 @@ public class EstadoBean implements EstadoBeanRemote {
 		TypedQuery<Estado> query = em.createQuery("select e from Estado e WHERE e.nombre LIKE :nombre",Estado.class).setParameter("nombre", filtro);
 		return query.getResultList();
 
+	}
+
+	@Override
+	public Estado obtenerPorNombre(String nombre) {
+		TypedQuery<Estado> query = em.createQuery("select e from Estado e WHERE e.nombre LIKE :nombre",Estado.class).setParameter("nombre", nombre);
+		return query.getSingleResult();
 	}
 
 }

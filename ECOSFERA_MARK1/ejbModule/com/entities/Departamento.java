@@ -71,6 +71,9 @@ public class Departamento implements Serializable {
 	}
    
 	
+	public void asignarLocalidad(Localidad localidad) {
+		this.localidades.add(localidad);
+	}
 	
-	
+
 }
