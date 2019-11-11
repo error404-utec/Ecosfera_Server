@@ -19,5 +19,7 @@ public interface TipoObservacionBeanRemote {
 	List<TipoObservacion> obtenerTodos(String filtro);
 	TipoObservacion obtenerporID(Long id);
 	void crearOModificar(TipoObservacion tipoObservacion) throws ServiciosException;
+	String controles_postCreate(TipoObservacion tipoObservacion);
+	String controles_preDelete(TipoObservacion tipoObservacion);
 
 }

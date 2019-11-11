@@ -8,6 +8,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Caracteristica;
+import com.entities.Departamento;
+import com.entities.Localidad;
 import com.entities.Permiso;
 import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
@@ -83,5 +86,36 @@ public class TipoObservacionBean implements TipoObservacionBeanRemote {
 		TypedQuery<TipoObservacion> query = em.createQuery("select o from TipoObservacion o WHERE o.id = :id",TipoObservacion.class).setParameter("id", id);
 		return query.getSingleResult();
 	}
+	
+	@Override
+	public String controles_postCreate(TipoObservacion tipoObservacion) {
+		String error = "";
+		TypedQuery<TipoObservacion> query = em.createQuery("select o from TipoObservacion o WHERE o.nombre LIKE :nombre",TipoObservacion.class).setParameter("nombre", tipoObservacion.getNombre());
+   		List<TipoObservacion> lista = query.getResultList();
+		for(TipoObservacion elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(tipoObservacion.getNombre())) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}	
+		return error;
+	}
+
+
+	@Override
+	public String controles_preDelete(TipoObservacion tipoObservacion) {
+		String error = "";
+		TypedQuery<TipoObservacion> query = em.createQuery("select o from TipoObservacion o WHERE o.id = :id",TipoObservacion.class).setParameter("id", tipoObservacion.getId());
+		TipoObservacion tipoObservacion2 = query.getSingleResult();
+   		List<Caracteristica> colloc = tipoObservacion2.getCaracteristicas();
+		if (!colloc.isEmpty()) {
+			error= "No se puede eliminar el tipo de observacion, cuenta con caracteristicas asociadas.";
+		}else {
+			//Controlar contra observaciones.
+		}
+		return error;
+	}
+
+	
 
 }
