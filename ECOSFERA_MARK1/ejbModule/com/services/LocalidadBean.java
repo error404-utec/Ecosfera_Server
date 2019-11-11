@@ -78,4 +78,60 @@ public class LocalidadBean implements LocalidadBeanRemote {
 		return query.getSingleResult();
 	}
 
+	@Override
+	public String controles_postCreate(Localidad localidad) {
+		String error = "";
+		TypedQuery<Localidad> query = em.createQuery("select l from Localidad l WHERE l.nombre LIKE :nombre",Localidad.class).setParameter("nombre", localidad.getNombre());
+   		List<Localidad> lista = query.getResultList();
+		for(Localidad elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(localidad.getNombre())) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		
+		if(error.isEmpty()) {
+			System.out.println();
+			query = em.createQuery("select l from Localidad l WHERE l.codigo LIKE :codigo",Localidad.class).setParameter("codigo", localidad.getCodigo());
+	   		lista.removeAll(lista);
+			lista = query.getResultList();
+			for(Localidad elemento : lista) {
+				error= "El código ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		
+		return error;
+	}
+
+
+	
+	@Override
+	public String controles_preDelete(Localidad localidad) {
+		String error = "";
+		/*
+		TypedQuery<Localidad> query = em.createQuery("select l from Localidad l WHERE l.id LIKE :id",Departamento.class).setParameter("id", departamento.getId());
+		Localidad localidad2 = query.getSingleResult();
+   		List<Localidad> colloc = localidad2.getLocalidades();
+		if (!colloc.isEmpty()) {
+			error= "No se puede eliminar el departamento, cuenta con localidades asociadas.";
+		}
+		*/
+		return error;
+	}
+
+	@Override
+	public String controles_postModify(Localidad localidad) {
+		String error = "";
+		TypedQuery<Localidad> query = em.createQuery("select l from Localidad l WHERE l.nombre LIKE :nombre",Localidad.class).setParameter("nombre", localidad.getNombre());
+   		List<Localidad> lista = query.getResultList();
+		for(Localidad elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(localidad.getNombre()) && elemento.getId()!= localidad.getId()) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}
+		return error;
+	}
+
 }

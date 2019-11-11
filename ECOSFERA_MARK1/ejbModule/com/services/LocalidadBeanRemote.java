@@ -15,4 +15,7 @@ public interface LocalidadBeanRemote {
 	List<Localidad> obtenerTodos();
 	List<Localidad> obtenerTodos(String filtro);
 	public Localidad obtenerPorID(Long id);
+	String controles_postCreate(Localidad localidad);
+	String controles_postModify(Localidad localidad);
+	String controles_preDelete(Localidad localidad);
 }
