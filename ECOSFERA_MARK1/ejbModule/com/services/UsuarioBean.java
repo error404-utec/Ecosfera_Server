@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Estado;
 import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
@@ -102,5 +103,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
    		}*/
 		return respuesta;
 	}
+	
+	
 
 }
