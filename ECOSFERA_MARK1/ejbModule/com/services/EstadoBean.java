@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Departamento;
 import com.entities.Estado;
 import com.entities.TipoDocumento;
 import com.exceptions.ServiciosException;
@@ -75,6 +76,12 @@ public class EstadoBean implements EstadoBeanRemote {
 	@Override
 	public Estado obtenerPorNombre(String nombre) {
 		TypedQuery<Estado> query = em.createQuery("select e from Estado e WHERE e.nombre LIKE :nombre",Estado.class).setParameter("nombre", nombre);
+		return query.getSingleResult();
+	}
+	
+	@Override
+	public Estado obtenerporID(Long id) {
+		TypedQuery<Estado> query = em.createQuery("select d from Estado d WHERE d.id LIKE :id",Estado.class).setParameter("id", id);
 		return query.getSingleResult();
 	}
 

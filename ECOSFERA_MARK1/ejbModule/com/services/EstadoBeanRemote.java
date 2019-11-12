@@ -15,4 +15,5 @@ public interface EstadoBeanRemote {
 	List<Estado> obtenerTodos();
 	List<Estado> obtenerTodos(String filtro);
 	Estado obtenerPorNombre(String nombre);
+	Estado obtenerporID(Long id);
 }
