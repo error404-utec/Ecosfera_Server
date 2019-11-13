@@ -91,17 +91,46 @@ public class UsuarioBean implements UsuarioBeanRemote {
 	public String controlarUnicidad(Usuario usuario) {
 		
 		String respuesta = "";
-   		//TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :usuario",Usuario.class).setParameter("usuario", usuario.getUsuario());
-   		//Usuario usuario1 = null;
-   		//usuario1 = query.getSingleResult();
-   		//if (usuario1!=null) {
-   		//	respuesta ="Nombre de usuario ya existe en el sistema.";
-   	//	}
+   		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :usuario",Usuario.class).setParameter("usuario", usuario.getUsuario());
+   		List<Usuario> col = query.getResultList();
+   		for(Usuario ele: col) {
+   			respuesta ="Nombre de usuario ya existe en el sistema.";
+   		}
    		
-   		/*TypedQuery<Usuario> query2 = em.createQuery("select u from Usuario u WHERE u.mail LIKE :mail",Usuario.class).setParameter("mail", usuario.getMail());
-   		if (query2.getSingleResult()!=null) {
+   		TypedQuery<Usuario> query2 = em.createQuery("select u from Usuario u WHERE u.mail LIKE :mail",Usuario.class).setParameter("mail", usuario.getMail());
+   		col.removeAll(col);
+   		col = query2.getResultList();
+   		for(Usuario ele: col) {
    			respuesta ="El mail ya se encuentra registrado en el sistema.";
-   		}*/
+   		}
+		return respuesta;
+	}
+	
+	public String controles_preModify(Usuario usuario) {
+		
+		String respuesta = "";
+   		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :usuario",Usuario.class).setParameter("usuario", usuario.getUsuario());
+   		List<Usuario> col = query.getResultList();
+   		for(Usuario ele: col) {
+   			System.out.println(usuario.getId());
+   			System.out.println(ele.getId());
+   			System.out.println(ele.getNombre());
+   			if(ele.getUsuario().equals(usuario.getUsuario()) && ele.getId()!=usuario.getId()){
+   				respuesta ="Nombre de usuario ya existe en el sistema.";
+   			}
+   		}
+   		
+   		TypedQuery<Usuario> query2 = em.createQuery("select u from Usuario u WHERE u.mail LIKE :mail",Usuario.class).setParameter("mail", usuario.getMail());
+   		col.removeAll(col);
+   		col = query2.getResultList();
+   		for(Usuario ele: col) {
+   			System.out.println(usuario.getId());
+   			System.out.println(ele.getId());
+   			System.out.println(ele.getMail());
+   			if(ele.getMail().equals(usuario.getMail()) && ele.getId()!=usuario.getId()){
+   				respuesta ="El mail ya se encuentra registrado en el sistema.";
+   			}
+   		}
 		return respuesta;
 	}
 	

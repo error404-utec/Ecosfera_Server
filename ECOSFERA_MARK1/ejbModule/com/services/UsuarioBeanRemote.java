@@ -17,5 +17,6 @@ public interface UsuarioBeanRemote {
 	Usuario obtenerPorNomber(String nombre);
 	Usuario obtenerPorId(Long id);
 	String controlarUnicidad(Usuario usuario);
+	public String controles_preModify(Usuario usuario);
 }
 
