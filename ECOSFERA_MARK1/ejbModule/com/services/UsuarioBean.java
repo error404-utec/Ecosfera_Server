@@ -43,6 +43,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
    	@Override
    	public void actualizar(Usuario usuario) throws ServiciosException {
    		try{
+   			System.out.println(usuario.getId());
    			em.merge(usuario);
    			em.flush();
    		}catch(PersistenceException e){
