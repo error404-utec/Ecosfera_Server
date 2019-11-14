@@ -9,8 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Caracteristica;
 import com.entities.Perfil;
 import com.entities.Permiso;
+import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
 /**
@@ -83,6 +85,54 @@ public class PerfilesBean implements PerfilesBeanRemote {
    			throw new ServiciosException("No se pudo asignar el nuevo perfil");
    		}
 		
+	}
+	
+	@Override
+	public void eliminarPermisos(Perfil perfil, Permiso permiso) throws ServiciosException {
+		try{
+			perfil.eliminarPermiso(permiso);
+   			perfil= em.merge(perfil);
+   			em.flush();
+   		}catch(PersistenceException e){
+   			throw new ServiciosException("No se pudo eliminar el perfil");
+   		}
+		
+	}
+	
+	@Override
+	public Perfil obtenerPorID(Long id) {
+		TypedQuery<Perfil> query = em.createQuery("select p from Perfil p WHERE p.id LIKE :id",Perfil.class).setParameter("id", id);
+		return query.getSingleResult();
+	}
+	
+	@Override
+	public String controles_postCreate(Perfil perfil) {
+		String error = "";
+		TypedQuery<Perfil> query = em.createQuery("select p from Perfil p WHERE p.nombre LIKE :nombre",Perfil.class).setParameter("nombre", perfil.getNombre());
+   		List<Perfil> lista = query.getResultList();
+		for(Perfil elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(perfil.getNombre())) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}	
+		return error;
+	}
+
+
+	@Override
+	public String controles_preDelete(Perfil perfil) {
+		String error = "";
+		/*
+		TypedQuery<Perfil> query = em.createQuery("select p from Perfil p WHERE p.id LIKE :id",Perfil.class).setParameter("id", id);
+		Perfil perfil1 = query.getSingleResult();
+   		List<Caracteristica> colloc = tipoObservacion2.getCaracteristicas();
+		if (!colloc.isEmpty()) {
+			error= "No se puede eliminar el tipo de observacion, cuenta con caracteristicas asociadas.";
+		}else {
+			//Controlar contra observaciones.
+		}*/
+		return error;
 	}
 
 }

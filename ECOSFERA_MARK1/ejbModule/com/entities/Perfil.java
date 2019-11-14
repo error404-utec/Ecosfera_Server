@@ -65,6 +65,10 @@ public class Perfil implements Serializable {
 		this.permisos.add(permiso);
 	}
 	
+	public void eliminarPermiso(Permiso permiso) {
+		this.permisos.remove(permiso);
+	}
+	
 	
 	
    
