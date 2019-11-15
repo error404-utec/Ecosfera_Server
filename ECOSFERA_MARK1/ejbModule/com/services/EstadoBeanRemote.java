@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+
 import com.entities.Estado;
 import com.exceptions.ServiciosException;
 
@@ -16,4 +17,5 @@ public interface EstadoBeanRemote {
 	List<Estado> obtenerTodos(String filtro);
 	Estado obtenerPorNombre(String nombre);
 	Estado obtenerporID(Long id);
+	String controles_postCreate(Estado estado);
 }

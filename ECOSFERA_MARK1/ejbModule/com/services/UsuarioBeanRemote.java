@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.entities.Estado;
+import com.entities.Perfil;
+import com.entities.TipoDocumento;
 import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
@@ -17,6 +20,9 @@ public interface UsuarioBeanRemote {
 	Usuario obtenerPorNomber(String nombre);
 	Usuario obtenerPorId(Long id);
 	String controlarUnicidad(Usuario usuario);
-	public String controles_preModify(Usuario usuario);
+	String controles_preModify(Usuario usuario);
+	String controles_PreDeltePerfiles(Perfil perfil);
+	String controles_PreDelteEstado(Estado estado);
+	String controles_PreDelteTdco(TipoDocumento tipoDocumento);
 }
 

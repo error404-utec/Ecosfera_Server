@@ -9,10 +9,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
+
 import com.entities.Caracteristica;
 import com.entities.Perfil;
 import com.entities.Permiso;
 import com.entities.TipoObservacion;
+import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
 /**
@@ -123,15 +126,7 @@ public class PerfilesBean implements PerfilesBeanRemote {
 	@Override
 	public String controles_preDelete(Perfil perfil) {
 		String error = "";
-		/*
-		TypedQuery<Perfil> query = em.createQuery("select p from Perfil p WHERE p.id LIKE :id",Perfil.class).setParameter("id", id);
-		Perfil perfil1 = query.getSingleResult();
-   		List<Caracteristica> colloc = tipoObservacion2.getCaracteristicas();
-		if (!colloc.isEmpty()) {
-			error= "No se puede eliminar el tipo de observacion, cuenta con caracteristicas asociadas.";
-		}else {
-			//Controlar contra observaciones.
-		}*/
+
 		return error;
 	}
 

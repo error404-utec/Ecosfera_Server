@@ -10,6 +10,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Estado;
+import com.entities.Perfil;
+import com.entities.TipoDocumento;
 import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
@@ -134,6 +136,41 @@ public class UsuarioBean implements UsuarioBeanRemote {
 		return respuesta;
 	}
 	
-	
+	public String controles_PreDeltePerfiles(Perfil perfil) {
+		String respuesta = "";
+		TypedQuery<Usuario> query = em.createQuery("select p from Usuario p",Usuario.class);
+		List<Usuario> col = query.getResultList();
+		for (Usuario us: col) {
+			List<Perfil> perfiles = us.getPerfiles();
+			for (Perfil per: perfiles) {
+				if(per.getId() == perfil.getId()) {
+					respuesta = "El perfil se encuentra asociado a un Usuario";
+				}
+			}
+					
+		}			
+		return respuesta;
+	}
 
+	@Override
+	public String controles_PreDelteEstado(Estado estado) {
+		String respuesta = "";
+		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.estado.id LIKE :id",Usuario.class).setParameter("id", estado.getId());
+		List<Usuario> col = query.getResultList();
+		for (Usuario us: col) {
+			respuesta = "El perfil se encuentra asociado a un Usuario";		
+		}			
+		return respuesta;
+	}
+
+	@Override
+	public String controles_PreDelteTdco(TipoDocumento tipoDocumento) {
+		String respuesta = "";
+		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.tipoDocumento.id LIKE :id",Usuario.class).setParameter("id", tipoDocumento.getId());
+		List<Usuario> col = query.getResultList();
+		for (Usuario us: col) {
+			respuesta = "El tipo de documento se encuentra asociado a un Usuario";		
+		}			
+		return respuesta;
+	}
 }
