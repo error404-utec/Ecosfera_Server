@@ -66,7 +66,17 @@ public class Perfil implements Serializable {
 	}
 	
 	public void eliminarPermiso(Permiso permiso) {
-		this.permisos.remove(permiso);
+		Permiso perEliminar = new Permiso();
+		boolean eliminar = false;
+		for(Permiso per : this.getPermisos()) {
+			if(per.getId() == permiso.getId()) {
+				perEliminar = per;
+				eliminar = true;
+			}
+		}
+		if (eliminar) {
+			this.permisos.remove(perEliminar);
+		}
 	}
 	
 	
