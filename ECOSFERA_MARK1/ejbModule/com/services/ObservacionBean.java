@@ -74,5 +74,7 @@ public class ObservacionBean implements ObservacionBeanRemote {
 			respuesta = "La localidad se encuentra asociado a una observacion.";		
 		}			
 		return respuesta;
+		
 	}
+    
 }
