@@ -126,9 +126,7 @@ public class Observacion implements Serializable {
 
 	public void setImagenes(List<Imagenes> imagenes) {
 		this.imagenes = imagenes;
-	}
-
-	
+	}	
 	
    
 }
