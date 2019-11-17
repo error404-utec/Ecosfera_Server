@@ -15,7 +15,7 @@ public class Detalle implements Serializable {
 	@GeneratedValue(generator="SEQ_ID_DETALLE")
 	@Column(name="ID_DETALLE",columnDefinition="Number(38,0)")
 	private Long id;
-	
+	//--
 	@Column(nullable=true,length=50,name="VAL_TEXTO")
 	private String valTexto;
 	
