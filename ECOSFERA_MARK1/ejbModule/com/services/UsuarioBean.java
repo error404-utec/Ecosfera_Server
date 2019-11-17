@@ -114,9 +114,7 @@ public class UsuarioBean implements UsuarioBeanRemote {
    		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :usuario",Usuario.class).setParameter("usuario", usuario.getUsuario());
    		List<Usuario> col = query.getResultList();
    		for(Usuario ele: col) {
-   			System.out.println(usuario.getId());
-   			System.out.println(ele.getId());
-   			System.out.println(ele.getNombre());
+
    			if(ele.getUsuario().equals(usuario.getUsuario()) && ele.getId()!=usuario.getId()){
    				respuesta ="Nombre de usuario ya existe en el sistema.";
    			}

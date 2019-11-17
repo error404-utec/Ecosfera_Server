@@ -2,6 +2,7 @@ package com.services;
 
 import com.entities.Localidad;
 import com.entities.Observacion;
+import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
 import javax.ejb.Remote;
@@ -21,4 +22,5 @@ public interface ObservacionBeanRemote {
     List<Observacion> obtenerTodas(Date start, Date end);
 
 	String controles_PreDeleteLocalidad(Localidad localiadad);
+	String controles_PreDeleteTipoObservaciones(TipoObservacion tipoObservacion);
 }

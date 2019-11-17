@@ -3,6 +3,7 @@ package com.services;
 import com.entities.Localidad;
 import com.entities.Observacion;
 import com.entities.TipoDocumento;
+import com.entities.TipoObservacion;
 import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
@@ -75,6 +76,17 @@ public class ObservacionBean implements ObservacionBeanRemote {
 		}			
 		return respuesta;
 		
+	}
+
+	@Override
+	public String controles_PreDeleteTipoObservaciones(TipoObservacion tipoObservacion) {
+		String respuesta = "";
+		TypedQuery<Observacion> query = em.createQuery("select u from Observacion u WHERE u.tipoObservacion.id LIKE :id",Observacion.class).setParameter("id", tipoObservacion.getId());
+		List<Observacion> col = query.getResultList();
+		for (Observacion us: col) {
+			respuesta = "La localidad se encuentra asociado a una observacion.";		
+		}			
+		return respuesta;
 	}
     
 }
