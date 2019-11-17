@@ -37,14 +37,27 @@ public class IniciarSesionBean implements IniciarSesionBeanRemote {
 		TypedQuery<Usuario> query = em.createQuery("select u from Usuario u WHERE u.usuario LIKE :nombre",Usuario.class).setParameter("nombre", nombre);
 		List<Usuario> usuarios = query.getResultList();
 		respuesta="Usuario incorrecto";
+		
 		for (Usuario user: usuarios) {
 			respuesta = "";
 			if(user.getUsuario().equalsIgnoreCase(nombre)) {
+				if(user.getEstado().isEliminado()) {
+					respuesta = "El usuario se encuentra " + user.getEstado().getNombre();
+					break;
+				}
+				
+				if(!user.getEstado().isPermiteLogin()) {
+					respuesta = "El usuario se encuentra " + user.getEstado().getNombre();
+					break;
+				}
 				if(!user.getPasswrd().equals(password)) {
 					respuesta = "Contraseña Incorrecta";
+					break;
 				}
 			}
 		}
+		
+		
 		return respuesta;
 	}
 

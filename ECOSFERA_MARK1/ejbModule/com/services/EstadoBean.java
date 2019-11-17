@@ -84,7 +84,7 @@ public class EstadoBean implements EstadoBeanRemote {
 	@Override
 	public String controles_postCreate(Estado estado) {
 		String respuesta = "";
-   		TypedQuery<Estado> query = em.createQuery("select e from Estado e WHERE e.nombre LIKE :nombre",Estado.class).setParameter("usuario", estado.getNombre());
+   		TypedQuery<Estado> query = em.createQuery("select e from Estado e WHERE e.nombre LIKE :nombre",Estado.class).setParameter("nombre", estado.getNombre());
    		List<Estado> col = query.getResultList();
    		for(Estado ele: col) {
    			if(ele.getNombre().equals(estado.getNombre()) && ele.getId()!=estado.getId()){

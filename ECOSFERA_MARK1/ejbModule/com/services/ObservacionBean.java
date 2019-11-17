@@ -81,10 +81,10 @@ public class ObservacionBean implements ObservacionBeanRemote {
 	@Override
 	public String controles_PreDeleteTipoObservaciones(TipoObservacion tipoObservacion) {
 		String respuesta = "";
-		TypedQuery<Observacion> query = em.createQuery("select u from Observacion u WHERE u.tipoObservacion.id LIKE :id",Observacion.class).setParameter("id", tipoObservacion.getId());
+		TypedQuery<Observacion> query = em.createQuery("select u from Observacion u WHERE u.tipo.id LIKE :id",Observacion.class).setParameter("id", tipoObservacion.getId());
 		List<Observacion> col = query.getResultList();
 		for (Observacion us: col) {
-			respuesta = "La localidad se encuentra asociado a una observacion.";		
+			respuesta = "El tipo de observacion se encuentra asociado a una observacion.";		
 		}			
 		return respuesta;
 	}
