@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import com.entities.Departamento;
 import com.entities.Localidad;
 import com.exceptions.ServiciosException;
 
@@ -95,6 +94,7 @@ public class LocalidadBean implements LocalidadBeanRemote {
 			query = em.createQuery("select l from Localidad l WHERE l.codigo LIKE :codigo",Localidad.class).setParameter("codigo", localidad.getCodigo());
 	   		lista.removeAll(lista);
 			lista = query.getResultList();
+			
 			for(Localidad elemento : lista) {
 				error= "El código ingresado ya existe en el sistema.";
 				break;

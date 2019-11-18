@@ -9,14 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import com.entities.Estado;
 import com.entities.Permiso;
-import com.entities.TipoDocumento;
 import com.exceptions.ServiciosException;
 
-/**
- * Session Bean implementation class PermisoBean
- */
+
 @Stateless
 @LocalBean
 public class PermisoBean implements PermisoBeanRemote {

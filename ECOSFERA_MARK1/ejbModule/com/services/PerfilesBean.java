@@ -9,13 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 
-import com.entities.Caracteristica;
 import com.entities.Perfil;
 import com.entities.Permiso;
-import com.entities.TipoObservacion;
-import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
 /**

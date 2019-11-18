@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import com.entities.Departamento;
 import com.entities.Zona;
 import com.exceptions.ServiciosException;
 

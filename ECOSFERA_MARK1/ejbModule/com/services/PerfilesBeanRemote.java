@@ -6,7 +6,6 @@ import javax.ejb.Remote;
 
 import com.entities.Perfil;
 import com.entities.Permiso;
-import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
 @Remote

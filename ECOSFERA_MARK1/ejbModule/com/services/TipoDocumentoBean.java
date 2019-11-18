@@ -9,25 +9,20 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import com.entities.Departamento;
 import com.entities.TipoDocumento;
 import com.exceptions.ServiciosException;
 
 
-/**
- * Session Bean implementation class TipoDocumentoBean
- */
+
 @Stateless
 public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
 
 
-	/**
-     * Default constructor. 
-     */
+
     public TipoDocumentoBean() {
-        // TODO Auto-generated constructor stub
+
     }
     
     @Override

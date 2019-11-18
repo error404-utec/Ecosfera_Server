@@ -9,7 +9,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Caracteristica;
-import com.entities.TipoObservacion;
+
 import com.exceptions.ServiciosException;
 
 /**

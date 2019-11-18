@@ -9,16 +9,10 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Caracteristica;
-import com.entities.Departamento;
-import com.entities.Localidad;
-import com.entities.Permiso;
 import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
-/**
- * Session Bean implementation class TipoObservacion
- */
-//cambio commit
+
 @Stateless
 public class TipoObservacionBean implements TipoObservacionBeanRemote {
 	@PersistenceContext

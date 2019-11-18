@@ -2,9 +2,7 @@ package com.services;
 
 import com.entities.Localidad;
 import com.entities.Observacion;
-import com.entities.TipoDocumento;
 import com.entities.TipoObservacion;
-import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
 import javax.ejb.LocalBean;
@@ -62,7 +60,7 @@ public class ObservacionBean implements ObservacionBeanRemote {
 
     @Override
     public List<Observacion> obtenerTodas(Date start, Date end) {
-        TypedQuery<Observacion> query = em.createQuery("SELECT i FROM Observacion i WHERE i.fecha BETWEEN :start AND :end", Observacion.class).setParameter("start", new Date(), TemporalType.DATE).setParameter("end", new Date(), TemporalType.DATE);
+        TypedQuery<Observacion> query = em.createQuery("SELECT i FROM Observacion i WHERE i.fecha >= :start AND i.fecha <=:end", Observacion.class).setParameter("start", start, TemporalType.DATE).setParameter("end", end, TemporalType.DATE);
         return query.getResultList();
     }
     

@@ -12,21 +12,17 @@ import javax.persistence.TypedQuery;
 import com.entities.Departamento;
 import com.entities.Zona;
 import com.exceptions.ServiciosException;
-import com.sun.org.apache.xml.internal.serializer.ToUnknownStream;
 
-/**
- * Session Bean implementation class ZonaBean
- */
+
+
 @Stateless
 @LocalBean
 public class ZonaBean implements ZonaBeanRemote {
 	@PersistenceContext
 	private EntityManager em;
-    /**
-     * Default constructor. 
-     */
+
     public ZonaBean() {
-        // TODO Auto-generated constructor stub
+
     }
 
     @Override
