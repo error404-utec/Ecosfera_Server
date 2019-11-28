@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.entities.Departamento;
 import com.entities.Permiso;
 import com.exceptions.ServiciosException;
 
@@ -15,4 +16,6 @@ public interface PermisoBeanRemote {
 	List<Permiso> obtenerTodos();
 	List<Permiso> obtenerTodos(String filtro);
 	Permiso obtenerporID(Long id);
+	String controles_postCreate(Permiso permiso);
+
 }

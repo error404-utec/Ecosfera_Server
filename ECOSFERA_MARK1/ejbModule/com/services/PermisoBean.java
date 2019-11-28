@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Departamento;
+import com.entities.Localidad;
 import com.entities.Permiso;
 import com.exceptions.ServiciosException;
 
@@ -76,5 +78,22 @@ public class PermisoBean implements PermisoBeanRemote {
 		TypedQuery<Permiso> query = em.createQuery("select p from Permiso p WHERE p.id LIKE :id",Permiso.class).setParameter("id", id);
 		return query.getSingleResult();
 	}
+   	
+   	@Override
+	public String controles_postCreate(Permiso permiso) {
+		String error = "";
+		TypedQuery<Permiso> query = em.createQuery("select d from Permiso d WHERE d.funcionalidad LIKE :funcionalidad",Permiso.class).setParameter("funcionalidad", permiso.getFuncionalidad());
+   		List<Permiso> lista = query.getResultList();
+		for(Permiso elemento : lista) {
+			if(elemento.getFuncionalidad().equalsIgnoreCase(permiso.getFuncionalidad())) {
+				error= "La funcionalidad ingresado ya existe en el sistema.";
+				break;
+			}
+		}		
+		return error;
+	}
+
+
+	
 
 }

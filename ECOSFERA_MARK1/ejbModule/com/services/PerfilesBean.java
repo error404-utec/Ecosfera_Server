@@ -9,9 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-
+import com.entities.Observacion;
 import com.entities.Perfil;
 import com.entities.Permiso;
+import com.entities.TipoObservacion;
 import com.exceptions.ServiciosException;
 
 /**
@@ -123,6 +124,23 @@ public class PerfilesBean implements PerfilesBeanRemote {
 	public String controles_preDelete(Perfil perfil) {
 		String error = "";
 
+		return error;
+	}
+	
+	@Override
+	public String controles_preDeletePer(Permiso permiso) {
+		String error = "";
+		TypedQuery<Perfil> query = em.createQuery("select p from Perfil",Perfil.class);
+   		List<Perfil> lista = query.getResultList();
+		for(Perfil elemento : lista) {
+			List<Permiso> permisos = elemento.getPermisos();
+			for(Permiso elemento2 : permisos) {
+				if(elemento2.getId()==permiso.getId()) {
+					error = "El Permiso se encuentra asociado a un Perfil.";	
+					break;
+				}
+			}
+		}			
 		return error;
 	}
 

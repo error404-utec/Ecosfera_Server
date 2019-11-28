@@ -20,4 +20,5 @@ public interface PerfilesBeanRemote {
 	String controles_postCreate(Perfil perfil);
 	String controles_preDelete(Perfil perfil);
 	void eliminarPermisos(Perfil perfil, Permiso permiso) throws ServiciosException;
+	String controles_preDeletePer(Permiso permiso);
 }
