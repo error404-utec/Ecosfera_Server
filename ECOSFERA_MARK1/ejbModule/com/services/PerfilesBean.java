@@ -130,7 +130,7 @@ public class PerfilesBean implements PerfilesBeanRemote {
 	@Override
 	public String controles_preDeletePer(Permiso permiso) {
 		String error = "";
-		TypedQuery<Perfil> query = em.createQuery("select p from Perfil",Perfil.class);
+		TypedQuery<Perfil> query = em.createQuery("select p from Perfil p",Perfil.class);
    		List<Perfil> lista = query.getResultList();
 		for(Perfil elemento : lista) {
 			List<Permiso> permisos = elemento.getPermisos();

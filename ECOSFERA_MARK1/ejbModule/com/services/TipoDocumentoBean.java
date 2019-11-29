@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Permiso;
 import com.entities.TipoDocumento;
 import com.exceptions.ServiciosException;
 
@@ -93,6 +94,20 @@ public class TipoDocumentoBean implements TipoDocumentoBeanRemote {
 	public TipoDocumento obtenerPorNombre(String nombre) {
 		TypedQuery<TipoDocumento> query = em.createQuery("select t from TipoDocumento t WHERE t.nombre = :nombre",TipoDocumento.class).setParameter("nombre", nombre);
 		return query.getSingleResult();
+	}
+	
+	@Override
+	public String controles_postCreate(TipoDocumento tipoDocumento) {
+		String error = "";
+		TypedQuery<TipoDocumento> query = em.createQuery("select t from TipoDocumento t WHERE t.nombre = :nombre",TipoDocumento.class).setParameter("nombre", tipoDocumento.getNombre());
+   		List<TipoDocumento> lista = query.getResultList();
+		for(TipoDocumento elemento : lista) {
+			if(elemento.getNombre().equalsIgnoreCase(tipoDocumento.getNombre())) {
+				error= "El nombre ingresado ya existe en el sistema.";
+				break;
+			}
+		}		
+		return error;
 	}
 
 	
