@@ -3,6 +3,7 @@ package com.services;
 import com.entities.Localidad;
 import com.entities.Observacion;
 import com.entities.TipoObservacion;
+import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
 import javax.ejb.Remote;
@@ -23,4 +24,6 @@ public interface ObservacionBeanRemote {
 
 	String controles_PreDeleteLocalidad(Localidad localiadad);
 	String controles_PreDeleteTipoObservaciones(TipoObservacion tipoObservacion);
+	
+	List<Observacion> obtenerPorUsuario(Usuario usuario);
 }

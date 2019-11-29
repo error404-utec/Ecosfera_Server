@@ -3,6 +3,7 @@ package com.services;
 import com.entities.Localidad;
 import com.entities.Observacion;
 import com.entities.TipoObservacion;
+import com.entities.Usuario;
 import com.exceptions.ServiciosException;
 
 import javax.ejb.LocalBean;
@@ -85,6 +86,13 @@ public class ObservacionBean implements ObservacionBeanRemote {
 			respuesta = "El tipo de observacion se encuentra asociado a una observacion.";		
 		}			
 		return respuesta;
+	}
+
+	@Override
+	public List<Observacion> obtenerPorUsuario(Usuario usuario) {
+		TypedQuery<Observacion> query = em.createQuery("select u from Observacion u WHERE u.usuario.id LIKE :id",Observacion.class).setParameter("id", usuario.getId());
+		List<Observacion> col = query.getResultList();
+		return col;		
 	}
     
 }
